@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/head :: head"/>
+    <body>
+    <h1 th:text="${ contact.fname +' '+ contact.lname}"></h1>
+
+    <div>
+        <div th:text="${'Phone: ' + contact.phone}"></div>
+        <div th:text="${'Email: '+ contact.email}"></div>
+    </div>
+
+    <p>
+        <a th:href="@{'/contacts/' + ${contact.id} + '/edit'}">Edit</a>
+        <a th:href="@{/contacts}">Back</a>
+    </p>
+
+    </body>
+</html>

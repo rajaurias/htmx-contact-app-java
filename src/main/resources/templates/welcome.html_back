@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<div th:replace="fragments/archive_ui :: archive_ui"></div>
+
+<form action="/contacts" method="get" class="tool-bar">
+    <label for="search">Search Term</label>
+    <input id="search" type="search" name="q" th:value="${param.q}"
+           th:hx-post="@{/contacts}"
+           hx-trigger="search, keyup delay:200ms changed"
+           hx-target="tbody"
+           hx-push-url="false"
+           hx-indicator="#spinner"/>
+    <img style="height: 20px" id="spinner" class="htmx-indicator" th:src="@{/img/spinning-circles.svg}"/>
+    <input type="submit" value="Search"/>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:replace="fragments/rows :: rows">
+    </tbody>
+</table>
+
+<div class="container">
+    <p>
+        Welcome to the Spring MVC Quickstart application!
+    </p>
+</div>
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

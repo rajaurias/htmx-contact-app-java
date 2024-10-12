@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head" />
+<body>
+
+<tr th:fragment="rows" th:each="contact: ${contacts}" >
+    <td><input type="checkbox" name="selected_contact_ids" th:value="${ contact.id }"
+               x-model="selected"></td>
+    <td th:text="${ contact.fname}"/>
+    <td th:text="${ contact.lname}"/>
+    <td th:text="${ contact.phone}"/>
+    <td th:text="${ contact.email}"/>
+    <td>
+        <div data-overflow-menu>
+            <button type="button" aria-haspopup="menu"
+                    th:aria-controls="'contact-menu-' + ${ contact.id } "
+            >Options</button>
+            <div role="menu" hidden id="contact-menu-{{ contact.id }}">
+                <a role="menuitem" th:href="'contacts/'+ ${ contact.id } + '/edit' ">Edit</a>
+                <a role="menuitem" th:href="'contacts/' + ${ contact.id } ">View</a>
+                <a role="menuitem" href="#"
+                   hx-delete="'/contacts/' + ${ contact.id }"
+                   hx-confirm="Are you sure you want to delete this contact?"
+                   hx-swap="outerHTML swap:1s"
+                   hx-target="closest tr">Delete</a>
+            </div>
+        </div>
+    </td>
+</tr>
+
+</body>
+</html>

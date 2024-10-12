@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head" />
+<body>
+<form th:action="'/contacts/'+ ${ contact.id } + '/edit'" method="post">
+    <fieldset>
+        <legend>Contact Values</legend>
+        <div class="table rows">
+            <p>
+                <label for="email">Email</label>
+                <input name="email" id="email" type="email"
+                       th:hx-get="'/contacts/' + ${ contact.id } + '/email'" hx-target="next .error"
+                       hx-trigger="change, keyup delay:200ms"
+                       placeholder="Email" th:value="${ contact.email }">
+                <span class="error" ></span>
+            </p>
+            <p>
+                <label for="fname">First Name</label>
+                <input name="first_name" id="fname" type="text" placeholder="First Name"
+                       th:value="${ contact.fname }">
+                <!--  <span class="error">{{ contact.errors['first'] }}</span>-->
+              </p>
+              <p>
+                  <label for="lname">Last Name</label>
+                  <input name="last_name" id="lname" type="text" placeholder="Last Name"
+                         th:value="${ contact.lname }">
+                  <!--<span class="error">{{ contact.errors['last'] }}</span>-->
+              </p>
+              <p>
+                  <label for="phone">Phone</label>
+                  <input name="phone" id="phone" type="text" placeholder="Phone" th:value="${ contact.phone }">
+                  <!--<span class="error">{{ contact.errors['phone'] }}</span>-->
+              </p>
+          </div>
+          <button>Save</button>
+      </fieldset>
+  </form>
+
+  <button id="delete-btn"
+          hx-delete="'/contacts/'+ ${ contact.id }"
+          hx-push-url="true"
+          hx-confirm="Are you sure you want to delete this contact?"
+          hx-target="body">
+      Delete Contact
+  </button>
+
+  <p>
+      <a href="../../contacts">Back</a>
+  </p>
+
+  </body>
+  </html>

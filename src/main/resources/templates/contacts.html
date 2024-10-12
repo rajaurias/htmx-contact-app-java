@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<div th:replace="fragments/archive_ui :: archive_ui"></div>
+
+<form action="/contacts" method="get" class="tool-bar">
+    <label for="search">Search Term</label>
+    <input id="search" type="search" name="q" th:value="${param.q}"
+           th:hx-get="@{/contacts}"
+           hx-trigger="search, keyup delay:200ms changed"
+           hx-target="tbody"
+           hx-push-url="true"
+           hx-indicator="#spinner"/>
+    <img style="height: 20px" id="spinner" class="htmx-indicator" th:src="@{/img/spinning-circles.svg}"/>
+    <input type="submit" value="Search"/>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:replace="fragments/rows :: rows">
+    </tbody>
+</table>
+<button hx-delete="/contacts"
+        hx-confirm="Are you sure you want to delete these contacts?"
+        hx-target="body">
+    Delete Selected Contacts
+</button>
+</form>
+<p>
+    <a th:href="@{/contacts/new}">Add Contact</a>
+    <span hx-get="/contacts/count" hx-trigger="revealed">
+          <img id="spinner" style="height: 20px"  class="htmx-indicator" src="/static/img/spinning-circles.svg"/>
+        </span>
+</p>
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>
