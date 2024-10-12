@@ -1,1 +1,1 @@
-This is an attempt to convert the python based contact app from the Hypermedia Systems Book into a java version with using spring web, thymeleaf frameworks.
+This is an attempt to convert the python based <a href="https://github.com/bigskysoftware/contact-app">contact app</a> from the <a href="https://hypermedia.systems/book/contents/">Hypermedia Systems Book</a> into a java version with using spring web, thymeleaf frameworks.
