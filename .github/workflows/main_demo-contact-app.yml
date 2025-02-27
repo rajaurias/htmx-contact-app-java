@@ -24,8 +24,13 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Install Gradle
+        uses: gradle/wrapper-validation-action@v1
+        with:
+         gradle-version: '7.4'  # Use the desired Gradle version
+
+      - name: Build with Gradle
+        run: ./gradlew build  # Or ./gradlew bootJar for Spring Boot apps
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
